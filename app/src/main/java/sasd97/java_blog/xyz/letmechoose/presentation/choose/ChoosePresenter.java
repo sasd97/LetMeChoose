@@ -32,8 +32,8 @@ public class ChoosePresenter extends MvpPresenter<ChooseView> {
     }
 
     public List<String> addIdea(String idea) {
+        if (TextUtils.isEmpty(idea)) return interactor.getIdeas();
         List<String> ideas = interactor.addIdea(idea);
-        if (TextUtils.isEmpty(idea)) return ideas;
         getViewState().updateList(idea);
         getViewState().clearEditText();
         if (interactor.getSize() > 0) getViewState().showFab();
