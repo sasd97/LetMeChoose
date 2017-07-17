@@ -99,6 +99,7 @@ public class ChooseFragment extends MvpAppCompatFragment
 
     @Override
     public void highlightCard(int position) {
+        Log.d("POSITION", String.valueOf(position));
         adapter.highlightCard(position);
         linearLayoutManager.scrollToPositionWithOffset(position, 20);
     }

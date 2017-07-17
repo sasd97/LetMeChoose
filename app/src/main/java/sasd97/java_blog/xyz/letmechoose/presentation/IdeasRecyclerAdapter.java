@@ -102,6 +102,7 @@ public class IdeasRecyclerAdapter extends RecyclerView.Adapter<IdeasRecyclerAdap
     }
 
     public void remove(int position) {
+        highlightPosition = -1;
         ideas.remove(position);
         notifyItemRangeChanged(0, position);
         notifyItemRangeChanged(position + 1, getItemCount());
