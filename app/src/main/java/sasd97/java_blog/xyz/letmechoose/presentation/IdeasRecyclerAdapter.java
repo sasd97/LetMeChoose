@@ -1,6 +1,7 @@
 package sasd97.java_blog.xyz.letmechoose.presentation;
 
 import android.content.Context;
+import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -25,10 +26,20 @@ public class IdeasRecyclerAdapter extends RecyclerView.Adapter<IdeasRecyclerAdap
     public static class IdeasViewHolder extends RecyclerView.ViewHolder {
 
         @BindView(R.id.row_idea_title) TextView title;
+        @BindView(R.id.row_idea_description) TextView description;
 
         public IdeasViewHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
+        }
+
+        public void setIdeaTitle(int number) {
+            Context context = title.getContext();
+            title.setText(context.getString(R.string.choose_fragment_row_title, number));
+        }
+
+        public void setDescription(@NonNull String idea) {
+            description.setText(idea);
         }
     }
 
@@ -42,12 +53,20 @@ public class IdeasRecyclerAdapter extends RecyclerView.Adapter<IdeasRecyclerAdap
     @Override
     public void onBindViewHolder(IdeasViewHolder holder, int position) {
         String description = ideas.get(position);
-        holder.title.setText(description);
+        holder.setIdeaTitle(position + 1);
+        holder.setDescription(description);
     }
 
     public void add(String description) {
         ideas.add(description);
         notifyItemInserted(getItemCount());
+    }
+
+    public void remove(int position) {
+        ideas.remove(position);
+        notifyItemRangeChanged(0, position);
+        notifyItemRangeChanged(position + 1, getItemCount());
+        notifyItemRemoved(position);
     }
 
     @Override

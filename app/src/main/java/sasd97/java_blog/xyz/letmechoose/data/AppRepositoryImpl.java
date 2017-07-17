@@ -2,6 +2,7 @@ package sasd97.java_blog.xyz.letmechoose.data;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 /**
  * Created by alexander on 17/07/2017.
@@ -19,6 +20,12 @@ public class AppRepositoryImpl implements AppRepository {
 
     @Override
     public List<String> getIdeas() {
+        return ideas;
+    }
+
+    @Override
+    public List<String> removeIdea(int position) {
+        ideas.remove(position);
         return ideas;
     }
 }

@@ -8,6 +8,7 @@ import sasd97.java_blog.xyz.letmechoose.domain.ChooseInteractor;
 import sasd97.java_blog.xyz.letmechoose.domain.ChooseInteractorImpl;
 import sasd97.java_blog.xyz.letmechoose.presentation.choose.ChoosePresenter;
 import sasd97.java_blog.xyz.letmechoose.presentation.main.MainPresenter;
+import sasd97.java_blog.xyz.letmechoose.presentation.selectedDialog.SelectDialogPresenter;
 
 /**
  * Created by alexander on 17/07/2017.
@@ -32,5 +33,11 @@ public class MainModule {
     @MainScope
     public ChoosePresenter provideChoosePresenter(ChooseInteractor interactor) {
         return new ChoosePresenter(interactor);
+    }
+
+    @Provides
+    @MainScope
+    public SelectDialogPresenter provideDialogPresenter() {
+        return new SelectDialogPresenter();
     }
 }

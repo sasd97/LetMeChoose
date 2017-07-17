@@ -8,4 +8,6 @@ import com.arellomobile.mvp.MvpView;
 
 public interface ChooseView extends MvpView {
     void updateList(String idea);
+    void clearEditText();
+    void showDialog(String idea);
 }

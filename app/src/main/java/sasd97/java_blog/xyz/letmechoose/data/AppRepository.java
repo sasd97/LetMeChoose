@@ -9,4 +9,5 @@ import java.util.List;
 public interface AppRepository {
     List<String> addIdea(String idea);
     List<String> getIdeas();
+    List<String> removeIdea(int position);
 }

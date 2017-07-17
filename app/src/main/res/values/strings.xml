@@ -10,5 +10,12 @@
     <!-- Choose fragment -->
     <string name="choose_fragment_add">Add</string>
     <string name="choose_fragment_select">Select</string>
+    <string name="choose_fragment_create_idea">Write own idea</string>
+    <string name="choose_fragment_row_title">Idea #%1$d</string>
+    <!-- Endregion -->
+
+    <!-- Select Dialog fragment -->
+    <string name="select_dialog_fragment_title">Your idea is</string>
+    <string name="select_dialog_fragment_positive_text">Wow!</string>
     <!-- Endregion -->
 </resources>

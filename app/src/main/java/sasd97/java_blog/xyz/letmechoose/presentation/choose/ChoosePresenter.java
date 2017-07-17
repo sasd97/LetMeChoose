@@ -1,6 +1,7 @@
 package sasd97.java_blog.xyz.letmechoose.presentation.choose;
 
 import android.support.annotation.NonNull;
+import android.text.TextUtils;
 
 import com.arellomobile.mvp.InjectViewState;
 import com.arellomobile.mvp.MvpPresenter;
@@ -24,11 +25,23 @@ public class ChoosePresenter extends MvpPresenter<ChooseView> {
 
     public List<String> addIdea(String idea) {
         List<String> ideas = interactor.addIdea(idea);
+        if (TextUtils.isEmpty(idea)) return ideas;
         getViewState().updateList(idea);
+        getViewState().clearEditText();
         return ideas;
     }
 
     public List<String> getIdeas() {
         return interactor.getIdeas();
+    }
+
+    public void deleteIdea(int position) {
+        interactor.removeIdea(position);
+    }
+
+    public void selectIdea() {
+        if (interactor.getIdeas().size() <= 0) return;
+        String idea = interactor.getRandomIdea();
+        getViewState().showDialog(idea);
     }
 }
