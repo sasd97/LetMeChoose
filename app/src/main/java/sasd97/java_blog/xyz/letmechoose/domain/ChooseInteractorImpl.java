@@ -38,8 +38,12 @@ public class ChooseInteractorImpl implements ChooseInteractor {
     }
 
     @Override
-    public String getRandomIdea() {
-        int selected = random.nextInt(getIdeas().size());
-        return getIdeas().get(selected);
+    public int getRandomPosition() {
+        return random.nextInt(getSize());
+    }
+
+    @Override
+    public int getSize() {
+        return repository.getIdeas().size();
     }
 }

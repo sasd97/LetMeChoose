@@ -2,6 +2,7 @@ package sasd97.java_blog.xyz.letmechoose.presentation.choose;
 
 import android.support.annotation.NonNull;
 import android.text.TextUtils;
+import android.util.Log;
 
 import com.arellomobile.mvp.InjectViewState;
 import com.arellomobile.mvp.MvpPresenter;
@@ -23,11 +24,19 @@ public class ChoosePresenter extends MvpPresenter<ChooseView> {
         this.interactor = interactor;
     }
 
+    @Override
+    public void attachView(ChooseView view) {
+        super.attachView(view);
+        getViewState().updateList(interactor.getIdeas());
+        if (interactor.getSize() > 0) getViewState().showFab();
+    }
+
     public List<String> addIdea(String idea) {
         List<String> ideas = interactor.addIdea(idea);
         if (TextUtils.isEmpty(idea)) return ideas;
         getViewState().updateList(idea);
         getViewState().clearEditText();
+        if (interactor.getSize() > 0) getViewState().showFab();
         return ideas;
     }
 
@@ -37,11 +46,11 @@ public class ChoosePresenter extends MvpPresenter<ChooseView> {
 
     public void deleteIdea(int position) {
         interactor.removeIdea(position);
+        if (interactor.getSize() == 0) getViewState().hideFab();
     }
 
     public void selectIdea() {
         if (interactor.getIdeas().size() <= 0) return;
-        String idea = interactor.getRandomIdea();
-        getViewState().showDialog(idea);
+        getViewState().highlightCard(interactor.getRandomPosition());
     }
 }

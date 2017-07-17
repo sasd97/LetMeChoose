@@ -2,6 +2,7 @@ package sasd97.java_blog.xyz.letmechoose.presentation.choose;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
@@ -15,13 +16,14 @@ import com.arellomobile.mvp.MvpAppCompatFragment;
 import com.arellomobile.mvp.presenter.InjectPresenter;
 import com.arellomobile.mvp.presenter.ProvidePresenter;
 
+import java.util.List;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import sasd97.java_blog.xyz.letmechoose.LetMeChooseApp;
 import sasd97.java_blog.xyz.letmechoose.R;
 import sasd97.java_blog.xyz.letmechoose.presentation.IdeasRecyclerAdapter;
-import sasd97.java_blog.xyz.letmechoose.presentation.selectedDialog.SelectDialogFragment;
 import sasd97.java_blog.xyz.letmechoose.utils.SwipeToDismissListener;
 
 /**
@@ -46,6 +48,7 @@ public class ChooseFragment extends MvpAppCompatFragment
 
     @BindView(R.id.choose_fragment_idea_message) EditText ideaDescription;
     @BindView(R.id.fragment_choose_recycler) RecyclerView ideasRecycler;
+    @BindView(R.id.choose_fragment_select_idea) FloatingActionButton selectIdeaButton;
 
     @ProvidePresenter
     public ChoosePresenter providePresenter() {
@@ -85,13 +88,29 @@ public class ChooseFragment extends MvpAppCompatFragment
     }
 
     @Override
+    public void updateList(List<String> ideas) {
+        adapter.addAll(ideas);
+    }
+
+    @Override
     public void clearEditText() {
         ideaDescription.setText(null);
     }
 
     @Override
-    public void showDialog(String idea) {
-        SelectDialogFragment.getInstance(idea).show(getChildFragmentManager(), null);
+    public void highlightCard(int position) {
+        adapter.highlightCard(position);
+        linearLayoutManager.scrollToPositionWithOffset(position, 20);
+    }
+
+    @Override
+    public void showFab() {
+        selectIdeaButton.show();
+    }
+
+    @Override
+    public void hideFab() {
+        selectIdeaButton.hide();
     }
 
     @OnClick(R.id.choose_fragment_add)
