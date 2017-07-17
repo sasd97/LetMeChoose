@@ -4,7 +4,7 @@ Application for making random decisions.
 If you can not decide - this is the application for you. :herb:
 
 ## Screens
-<img src="https://github.com/sasd97/LetMeChoose/blob/feature/update/images/round_icon.png" width="270" height="480"><img src="https://github.com/sasd97/LetMeChoose/blob/feature/update/images/sq_icon.png" width="270" height="480"><img src="https://github.com/sasd97/LetMeChoose/blob/feature/update/images/editing.png" width="270" height="480"><img src="https://github.com/sasd97/LetMeChoose/blob/feature/update/images/list.png" width="270" height="480"><img src="https://github.com/sasd97/LetMeChoose/blob/feature/update/images/alert.png" width="270" height="480">
+<img src="https://github.com/sasd97/LetMeChoose/blob/feature/update/images/round_icon.png" width="270" height="480"> <img src="https://github.com/sasd97/LetMeChoose/blob/feature/update/images/sq_icon.png" width="270" height="480"> <img src="https://github.com/sasd97/LetMeChoose/blob/feature/update/images/editing.png" width="270" height="480"> <img src="https://github.com/sasd97/LetMeChoose/blob/feature/update/images/list.png" width="270" height="480"> <img src="https://github.com/sasd97/LetMeChoose/blob/feature/update/images/alert.png" width="270" height="480">
 
 ## License
 MIT License
