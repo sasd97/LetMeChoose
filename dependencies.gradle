@@ -13,6 +13,7 @@ ext.versions = [
         dagger                       : '2.11',
         retrofit                     : '2.3.0',
         moxy                         : '1.5.3',
+        gson                         : '2.8.1',
 
         supportLibs                  : '25.3.1',
         constraint                   : '1.0.2',
@@ -34,6 +35,8 @@ ext.libraries = [
         moxy                    : "com.arello-mobile:moxy:$versions.moxy",
         moxyAppCompat           : "com.arello-mobile:moxy-app-compat:$versions.moxy",
         moxyCompiler            : "com.arello-mobile:moxy-compiler:$versions.moxy",
+
+        gson                    : "com.google.code.gson:gson:$versions.gson",
 
         butterKnife             : "com.jakewharton:butterknife:$versions.butterKnife",
         butterKnifeCompiler     : "com.jakewharton:butterknife-compiler:$versions.butterKnife",

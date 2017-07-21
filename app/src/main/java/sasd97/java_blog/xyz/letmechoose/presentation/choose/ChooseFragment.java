@@ -1,5 +1,6 @@
 package sasd97.java_blog.xyz.letmechoose.presentation.choose;
 
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
@@ -46,8 +47,9 @@ public class ChooseFragment extends MvpAppCompatFragment
 
     @InjectPresenter ChoosePresenter presenter;
 
-    @BindView(R.id.choose_fragment_idea_message) EditText ideaDescription;
     @BindView(R.id.fragment_choose_recycler) RecyclerView ideasRecycler;
+    @BindView(R.id.choose_fragment_idea_message) EditText ideaDescription;
+    @BindView(R.id.choose_fragment_clear_ideas) FloatingActionButton clearIdeasButton;
     @BindView(R.id.choose_fragment_select_idea) FloatingActionButton selectIdeaButton;
 
     @ProvidePresenter
@@ -93,6 +95,11 @@ public class ChooseFragment extends MvpAppCompatFragment
     }
 
     @Override
+    public void clearList() {
+        adapter.clear();
+    }
+
+    @Override
     public void clearEditText() {
         ideaDescription.setText(null);
     }
@@ -105,12 +112,19 @@ public class ChooseFragment extends MvpAppCompatFragment
     }
 
     @Override
+    public void removeHighlight() {
+        adapter.removeHighlight();
+    }
+
+    @Override
     public void showFab() {
+        clearIdeasButton.show();
         selectIdeaButton.show();
     }
 
     @Override
     public void hideFab() {
+        clearIdeasButton.hide();
         selectIdeaButton.hide();
     }
 
@@ -123,5 +137,10 @@ public class ChooseFragment extends MvpAppCompatFragment
     @OnClick(R.id.choose_fragment_select_idea)
     public void onSelectIdeaClick(View v) {
         presenter.selectIdea();
+    }
+
+    @OnClick(R.id.choose_fragment_clear_ideas)
+    public void onClearIdeas(View v) {
+        presenter.clearIdeas();
     }
 }

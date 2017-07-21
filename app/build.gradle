@@ -39,6 +39,8 @@ android {
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
 
+    compile libraries.gson
+
     //support library
     compile libraries.supportDesign
     compile libraries.supportAppCompat

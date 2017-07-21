@@ -9,17 +9,22 @@ import com.arellomobile.mvp.MvpPresenter;
 
 import java.util.List;
 
+import javax.inject.Inject;
+
+import sasd97.java_blog.xyz.letmechoose.di.scope.MainScope;
 import sasd97.java_blog.xyz.letmechoose.domain.ChooseInteractor;
 
 /**
  * Created by alexander on 17/07/2017.
  */
 
+@MainScope
 @InjectViewState
 public class ChoosePresenter extends MvpPresenter<ChooseView> {
 
     private ChooseInteractor interactor;
 
+    @Inject
     public ChoosePresenter(@NonNull ChooseInteractor interactor) {
         this.interactor = interactor;
     }
@@ -40,17 +45,26 @@ public class ChoosePresenter extends MvpPresenter<ChooseView> {
         return ideas;
     }
 
-    public List<String> getIdeas() {
-        return interactor.getIdeas();
-    }
-
     public void deleteIdea(int position) {
         interactor.removeIdea(position);
         if (interactor.getSize() == 0) getViewState().hideFab();
     }
 
+    public void clearIdeas() {
+        interactor.clearIdeas();
+        getViewState().removeHighlight();
+        getViewState().clearList();
+        getViewState().hideFab();
+    }
+
     public void selectIdea() {
-        if (interactor.getIdeas().size() <= 0) return;
+        if (interactor.getSize() <= 0) return;
         getViewState().highlightCard(interactor.getRandomPosition());
+    }
+
+    @Override
+    public void detachView(ChooseView view) {
+        super.detachView(view);
+        interactor.saveIdeas();
     }
 }

@@ -1,5 +1,7 @@
 package sasd97.java_blog.xyz.letmechoose.di.modules;
 
+import com.google.gson.Gson;
+
 import dagger.Module;
 import dagger.Provides;
 import sasd97.java_blog.xyz.letmechoose.data.AppRepository;
@@ -24,13 +26,8 @@ public class MainModule {
 
     @Provides
     @MainScope
-    public ChooseInteractor provideChooseInteractor(AppRepository repository) {
-        return new ChooseInteractorImpl(repository);
-    }
-
-    @Provides
-    @MainScope
-    public ChoosePresenter provideChoosePresenter(ChooseInteractor interactor) {
-        return new ChoosePresenter(interactor);
+    public ChooseInteractor provideChooseInteractor(Gson gson,
+                                                    AppRepository repository) {
+        return new ChooseInteractorImpl(gson, repository);
     }
 }

@@ -24,7 +24,9 @@ import sasd97.java_blog.xyz.letmechoose.R;
 
 public class IdeasRecyclerAdapter extends RecyclerView.Adapter<IdeasRecyclerAdapter.IdeasViewHolder> {
 
-    private int highlightPosition = -1;
+    private static final int NO_HIGHLIGHT = -1;
+
+    private int highlightPosition = NO_HIGHLIGHT;
     private List<String> ideas = new ArrayList<>();
 
     static class IdeasViewHolder extends RecyclerView.ViewHolder {
@@ -94,15 +96,24 @@ public class IdeasRecyclerAdapter extends RecyclerView.Adapter<IdeasRecyclerAdap
         notifyItemRangeInserted(size, getItemCount());
     }
 
+    public void clear() {
+        notifyItemRangeRemoved(0, getItemCount());
+        ideas.clear();
+    }
+
     public void highlightCard(int position) {
         int lastHighlightCard = highlightPosition;
         highlightPosition = position;
-        if (lastHighlightCard != -1) notifyItemChanged(lastHighlightCard);
+        if (lastHighlightCard != NO_HIGHLIGHT) notifyItemChanged(lastHighlightCard);
         notifyItemChanged(highlightPosition);
     }
 
+    public void removeHighlight() {
+        this.highlightPosition = NO_HIGHLIGHT;
+    }
+
     public void remove(int position) {
-        highlightPosition = -1;
+        removeHighlight();
         ideas.remove(position);
         notifyItemRangeChanged(0, position);
         notifyItemRangeChanged(position + 1, getItemCount());

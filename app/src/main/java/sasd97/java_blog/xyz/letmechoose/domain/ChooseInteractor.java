@@ -10,6 +10,10 @@ public interface ChooseInteractor {
     List<String> addIdea(String idea);
     List<String> getIdeas();
     List<String> removeIdea(int position);
+
+    void saveIdeas();
+    void clearIdeas();
+
     int getRandomPosition();
     int getSize();
 }

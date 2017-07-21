@@ -7,7 +7,16 @@ import java.util.List;
  */
 
 public interface AppRepository {
+
+    String IDEAS_KEY = "keys.cached.ideas";
+
+    void setIdeas(List<String> ideas);
+
     List<String> addIdea(String idea);
     List<String> getIdeas();
     List<String> removeIdea(int position);
+    void clearIdeas();
+
+    String getCachedIdeas();
+    void saveIdeas();
 }

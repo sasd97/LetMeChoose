@@ -11,10 +11,12 @@ import java.util.List;
 public interface ChooseView extends MvpView {
     void updateList(String idea);
     void updateList(List<String> ideas);
+    void clearList();
 
     void clearEditText();
 
     void highlightCard(int position);
+    void removeHighlight();
 
     void showFab();
     void hideFab();
