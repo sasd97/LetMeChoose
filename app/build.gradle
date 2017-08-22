@@ -51,6 +51,15 @@ dependencies {
     compile libraries.moxyAppCompat
     annotationProcessor libraries.moxyCompiler
 
+    //rx
+    compile libraries.rxjava
+    compile libraries.rxandroid
+
+    //room
+    compile libraries.room
+    compile libraries.roomrx
+    annotationProcessor libraries.roomCompiler
+
     //butterknife
     compile libraries.butterKnife
     annotationProcessor libraries.butterKnifeCompiler
