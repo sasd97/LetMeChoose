@@ -7,7 +7,15 @@ import com.google.gson.Gson;
 import java.util.ArrayList;
 import java.util.List;
 
-import sasd97.java_blog.xyz.letmechoose.data.storages.CacheStorage;
+import javax.inject.Inject;
+
+import io.reactivex.Completable;
+import io.reactivex.Single;
+import io.reactivex.SingleSource;
+import io.reactivex.functions.Function;
+import sasd97.java_blog.xyz.letmechoose.data.database.AppDatabase;
+import sasd97.java_blog.xyz.letmechoose.data.database.IdeaEntity;
+import sasd97.java_blog.xyz.letmechoose.domain.models.IdeaModel;
 
 /**
  * Created by alexander on 17/07/2017.
@@ -15,35 +23,32 @@ import sasd97.java_blog.xyz.letmechoose.data.storages.CacheStorage;
 
 public class AppRepositoryImpl implements AppRepository {
 
-    private Gson gson;
-    private CacheStorage cacheStorage;
-    private List<String> ideas = new ArrayList<>();
+    private AppDatabase database;
+    private List<IdeaModel> ideas = new ArrayList<>();
 
-    public AppRepositoryImpl(@NonNull Gson gson,
-                             @NonNull CacheStorage cacheStorage) {
-        this.gson = gson;
-        this.cacheStorage = cacheStorage;
+    public AppRepositoryImpl(@NonNull AppDatabase database) {
+        this.database = database;
     }
 
     @Override
-    public void setIdeas(List<String> ideas) {
+    public void setIdeas(List<IdeaModel> ideas) {
         if (ideas == null) return;
         this.ideas = ideas;
     }
 
     @Override
-    public List<String> addIdea(String idea) {
+    public List<IdeaModel> addIdea(IdeaModel idea) {
         ideas.add(idea);
         return ideas;
     }
 
     @Override
-    public List<String> getIdeas() {
+    public List<IdeaModel> getIdeas() {
         return ideas;
     }
 
     @Override
-    public List<String> removeIdea(int position) {
+    public List<IdeaModel> removeIdea(int position) {
         ideas.remove(position);
         return ideas;
     }
@@ -54,13 +59,30 @@ public class AppRepositoryImpl implements AppRepository {
     }
 
     @Override
-    public String getCachedIdeas() {
-        return cacheStorage.getString(IDEAS_KEY, "[]");
+    public Single<List<IdeaModel>> getCachedIdeas() {
+        return database.ideaDao()
+                .getAll()
+                .flatMap(new Function<List<IdeaEntity>, SingleSource<? extends List<IdeaModel>>>() {
+                    @Override
+                    public SingleSource<? extends List<IdeaModel>> apply(@io.reactivex.annotations.NonNull List<IdeaEntity> ideaEntities) throws Exception {
+                        List<IdeaModel> models = new ArrayList<>();
+                        for (IdeaEntity entity: ideaEntities) {
+                            models.add(IdeaEntity.toModel(entity));
+                        }
+                        return Single.just(models);
+                    }
+                });
     }
 
     @Override
-    public void saveIdeas() {
-        String json = gson.toJson(ideas);
-        cacheStorage.put(IDEAS_KEY, json);
+    public Completable saveIdeas() {
+        List<IdeaEntity> models = new ArrayList<>();
+
+        for (IdeaModel entity: ideas) {
+            models.add(IdeaEntity.fromModel(entity));
+        }
+
+        return Completable.fromAction(() -> database.ideaDao()
+                .insertAll(models));
     }
 }

@@ -17,6 +17,7 @@ import butterknife.BindColor;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import sasd97.java_blog.xyz.letmechoose.R;
+import sasd97.java_blog.xyz.letmechoose.domain.models.IdeaModel;
 
 /**
  * Created by alexander on 17/07/2017.
@@ -27,7 +28,7 @@ public class IdeasRecyclerAdapter extends RecyclerView.Adapter<IdeasRecyclerAdap
     private static final int NO_HIGHLIGHT = -1;
 
     private int highlightPosition = NO_HIGHLIGHT;
-    private List<String> ideas = new ArrayList<>();
+    private List<IdeaModel> ideas = new ArrayList<>();
 
     static class IdeasViewHolder extends RecyclerView.ViewHolder {
 
@@ -78,19 +79,19 @@ public class IdeasRecyclerAdapter extends RecyclerView.Adapter<IdeasRecyclerAdap
 
     @Override
     public void onBindViewHolder(IdeasViewHolder holder, int position) {
-        String description = ideas.get(position);
+        IdeaModel idea = ideas.get(position);
         holder.setIdeaTitle(position + 1);
-        holder.setDescription(description);
+        holder.setDescription(idea.getDescription());
         if (position == highlightPosition) holder.highlightCard();
         else holder.paintCard();
     }
 
-    public void add(String description) {
+    public void add(IdeaModel description) {
         ideas.add(description);
         notifyItemInserted(getItemCount());
     }
 
-    public void addAll(Collection<String> collection) {
+    public void addAll(Collection<IdeaModel> collection) {
         int size = getItemCount();
         ideas.addAll(collection);
         notifyItemRangeInserted(size, getItemCount());

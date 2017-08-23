@@ -18,8 +18,7 @@ import sasd97.java_blog.xyz.letmechoose.navigation.Router;
 import sasd97.java_blog.xyz.letmechoose.navigation.fragments.FragmentCommand;
 
 public class MainActivity extends MvpAppCompatActivity
-    implements BottomNavigationView.OnNavigationItemSelectedListener,
-        MainView {
+    implements BottomNavigationView.OnNavigationItemSelectedListener, MainView {
 
     @BindView(R.id.activity_choose_bottom_navigation) BottomNavigationView navigation;
 
@@ -44,7 +43,6 @@ public class MainActivity extends MvpAppCompatActivity
         ButterKnife.bind(this);
 
         presenter.setRouter(router);
-
         navigation.setOnNavigationItemSelectedListener(this);
     }
 

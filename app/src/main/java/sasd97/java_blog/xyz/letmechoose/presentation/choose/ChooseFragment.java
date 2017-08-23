@@ -24,6 +24,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import sasd97.java_blog.xyz.letmechoose.LetMeChooseApp;
 import sasd97.java_blog.xyz.letmechoose.R;
+import sasd97.java_blog.xyz.letmechoose.domain.models.IdeaModel;
 import sasd97.java_blog.xyz.letmechoose.presentation.IdeasRecyclerAdapter;
 import sasd97.java_blog.xyz.letmechoose.utils.SwipeToDismissListener;
 
@@ -85,12 +86,12 @@ public class ChooseFragment extends MvpAppCompatFragment
     }
 
     @Override
-    public void updateList(String idea) {
+    public void updateList(IdeaModel idea) {
         adapter.add(idea);
     }
 
     @Override
-    public void updateList(List<String> ideas) {
+    public void updateList(List<IdeaModel> ideas) {
         adapter.addAll(ideas);
     }
 
@@ -131,7 +132,9 @@ public class ChooseFragment extends MvpAppCompatFragment
     @OnClick(R.id.choose_fragment_add)
     public void onAddIdeaClick(View v) {
         String description = ideaDescription.getText().toString();
-        presenter.addIdea(description);
+        IdeaModel idea = new IdeaModel();
+        idea.setDescription(description);
+        presenter.addIdea(idea);
     }
 
     @OnClick(R.id.choose_fragment_select_idea)
