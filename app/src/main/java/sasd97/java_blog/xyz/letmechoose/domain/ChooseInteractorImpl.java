@@ -38,12 +38,7 @@ public class ChooseInteractorImpl implements ChooseInteractor {
     @Override
     public Single<List<IdeaModel>> getIdeas() {
         return repository.getCachedIdeas()
-                .doOnSuccess(new Consumer<List<IdeaModel>>() {
-                    @Override
-                    public void accept(List<IdeaModel> ideaModels) throws Exception {
-                        repository.setIdeas(ideaModels);
-                    }
-                });
+                .doOnSuccess(ideaModels -> repository.setIdeas(ideaModels));
     }
 
     @Override

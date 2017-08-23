@@ -4,6 +4,8 @@ import android.app.Application;
 import android.content.Context;
 import android.support.annotation.NonNull;
 
+import com.facebook.stetho.Stetho;
+
 import sasd97.java_blog.xyz.letmechoose.di.AppComponent;
 import sasd97.java_blog.xyz.letmechoose.di.DaggerAppComponent;
 import sasd97.java_blog.xyz.letmechoose.di.modules.AppModule;
@@ -25,6 +27,8 @@ public class LetMeChooseApp extends Application {
         super.onCreate();
 
         this.appComponent = buildDi();
+
+        if (BuildConfig.DEBUG) Stetho.initializeWithDefaults(this);
     }
 
     public AppComponent getAppComponent() {

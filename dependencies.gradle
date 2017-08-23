@@ -25,6 +25,13 @@ ext.versions = [
 
         espresso                     : '2.2.2',
         junit                        : '4.12',
+
+        stetho                       : '1.5.0',
+]
+
+ext.gradlePlugins = [
+        android          : "com.android.tools.build:gradle:$versions.androidGradlePlugin",
+        retrolambda      : "me.tatarka:gradle-retrolambda:$versions.retrolambdaGradlePlugin",
 ]
 
 ext.libraries = [
@@ -58,8 +65,7 @@ ext.libraries = [
         junit                   : "junit:junit:$versions.junit",
         espressoCore            : "com.android.support.test.espresso:espresso-core:$versions.espresso",
 ]
-ext.gradlePlugins = [
-        android          : "com.android.tools.build:gradle:$versions.androidGradlePlugin",
-        retrolambda      : "me.tatarka:gradle-retrolambda:$versions.retrolambdaGradlePlugin",
-]
 
+ext.devLibraries = [
+        stetho                  : "com.facebook.stetho:stetho:$versions.stetho"
+]

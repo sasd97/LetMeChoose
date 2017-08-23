@@ -62,27 +62,26 @@ public class AppRepositoryImpl implements AppRepository {
     public Single<List<IdeaModel>> getCachedIdeas() {
         return database.ideaDao()
                 .getAll()
-                .flatMap(new Function<List<IdeaEntity>, SingleSource<? extends List<IdeaModel>>>() {
-                    @Override
-                    public SingleSource<? extends List<IdeaModel>> apply(@io.reactivex.annotations.NonNull List<IdeaEntity> ideaEntities) throws Exception {
-                        List<IdeaModel> models = new ArrayList<>();
-                        for (IdeaEntity entity: ideaEntities) {
-                            models.add(IdeaEntity.toModel(entity));
-                        }
-                        return Single.just(models);
+                .flatMap(ideaEntities -> {
+                    List<IdeaModel> models = new ArrayList<>();
+                    for (IdeaEntity entity: ideaEntities) {
+                        models.add(IdeaEntity.toModel(entity));
                     }
+                    return Single.just(models);
                 });
     }
 
     @Override
     public Completable saveIdeas() {
         List<IdeaEntity> models = new ArrayList<>();
-
         for (IdeaModel entity: ideas) {
             models.add(IdeaEntity.fromModel(entity));
         }
 
-        return Completable.fromAction(() -> database.ideaDao()
-                .insertAll(models));
+        return Completable
+                .fromAction(() -> {
+                    database.ideaDao().removeAll();
+                    database.ideaDao().insertAll(models);
+                });
     }
 }

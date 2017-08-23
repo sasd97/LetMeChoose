@@ -81,4 +81,7 @@ dependencies {
     //dagger
     compile libraries.dagger
     annotationProcessor libraries.daggerCompiler
+
+    //dev deps
+    compile devLibraries.stetho
 }

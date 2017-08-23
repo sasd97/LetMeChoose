@@ -21,4 +21,7 @@ public interface IdeaDao {
 
     @Insert
     void insertAll(@NonNull List<IdeaEntity> entities);
+
+    @Query("DELETE FROM ideas")
+    void removeAll();
 }

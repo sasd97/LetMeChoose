@@ -12,8 +12,6 @@ import sasd97.java_blog.xyz.letmechoose.domain.models.IdeaModel;
 
 public interface AppRepository {
 
-    String IDEAS_KEY = "keys.cached.ideas";
-
     void setIdeas(List<IdeaModel> ideas);
 
     List<IdeaModel> addIdea(IdeaModel idea);
