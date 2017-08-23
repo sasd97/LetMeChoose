@@ -4,7 +4,7 @@ Application for making random decisions.
 If you can not decide - this is the application for you. :herb:
 
 ## Screens
-<img src="https://github.com/sasd97/LetMeChoose/blob/master/images/round_icon.png" width="270" height="480"> <img src="https://github.com/sasd97/LetMeChoose/blob/master/images/sq_icon.png" width="270" height="480"> <img src="https://github.com/sasd97/LetMeChoose/blob/master/images/list.png" width="270" height="480"> <img src="https://github.com/sasd97/LetMeChoose/blob/master/images/alert.png" width="270" height="480">
+<img src="https://github.com/sasd97/LetMeChoose/blob/master/images/round_icon.png" width="270" height="480"> <img src="https://github.com/sasd97/LetMeChoose/blob/master/images/sq_icon.png" width="270" height="480"> <img src="https://github.com/sasd97/LetMeChoose/blob/master/images/editing.png" width="270" height="480"> <img src="https://github.com/sasd97/LetMeChoose/blob/master/images/list.png" width="270" height="480"> <img src="https://github.com/sasd97/LetMeChoose/blob/master/images/alert.png" width="270" height="480">
 
 ## License
 MIT License

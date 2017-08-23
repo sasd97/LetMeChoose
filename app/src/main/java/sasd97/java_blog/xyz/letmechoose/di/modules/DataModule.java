@@ -13,31 +13,29 @@ import dagger.Provides;
 import sasd97.java_blog.xyz.letmechoose.data.AppRepository;
 import sasd97.java_blog.xyz.letmechoose.data.AppRepositoryImpl;
 import sasd97.java_blog.xyz.letmechoose.data.database.AppDatabase;
-import sasd97.java_blog.xyz.letmechoose.utils.RxSchedulers;
-import sasd97.java_blog.xyz.letmechoose.utils.RxSchedulersImpl;
 
 /**
- * Created by alexander on 17/07/2017.
+ * Created by alexander on 21/07/2017.
  */
 
 @Module
-public class AppModule {
+public class DataModule {
 
-    private Context context;
-
-    public AppModule(@NonNull Context context) {
-        this.context = context;
+    @Provides
+    @Singleton
+    public Gson provideGson() {
+        return new Gson();
     }
 
     @Provides
     @Singleton
-    public Context provideContext() {
-        return context;
+    public AppDatabase provideDatabase(@NonNull Context context) {
+        return Room.databaseBuilder(context, AppDatabase.class, AppDatabase.DATABASE_NAME).build();
     }
 
     @Provides
     @Singleton
-    public RxSchedulers provideSchedulers() {
-        return new RxSchedulersImpl();
+    public AppRepository provideRepository(@NonNull AppDatabase database) {
+        return new AppRepositoryImpl(database);
     }
 }

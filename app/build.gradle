@@ -1,12 +1,13 @@
 apply plugin: 'com.android.application'
+apply plugin: 'me.tatarka.retrolambda'
 
 def keystorePropertiesFile = rootProject.file("keystore.properties")
 def keystoreProperties = new Properties()
 keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
 
 android {
-    compileSdkVersion 25
-    buildToolsVersion "25.0.3"
+    compileSdkVersion versions.compileSdk
+    buildToolsVersion versions.buildTools
 
     defaultConfig {
         applicationId "sasd97.java_blog.xyz.letmechoose"
@@ -16,6 +17,18 @@ android {
         versionName versions.name
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         vectorDrawables.useSupportLibrary = true
+
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments = ["room.schemaLocation":
+                                     "$projectDir/schemas".toString()]
+            }
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
     }
 
     signingConfigs {
@@ -39,8 +52,11 @@ android {
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
 
+    compile libraries.gson
+
     //support library
     compile libraries.supportDesign
+    compile libraries.supportCardView
     compile libraries.supportAppCompat
     compile libraries.supportConstraint
 
@@ -49,6 +65,15 @@ dependencies {
     compile libraries.moxyAppCompat
     annotationProcessor libraries.moxyCompiler
 
+    //rx
+    compile libraries.rxjava
+    compile libraries.rxandroid
+
+    //room
+    compile libraries.room
+    compile libraries.roomrx
+    annotationProcessor libraries.roomCompiler
+
     //butterknife
     compile libraries.butterKnife
     annotationProcessor libraries.butterKnifeCompiler
@@ -56,5 +81,7 @@ dependencies {
     //dagger
     compile libraries.dagger
     annotationProcessor libraries.daggerCompiler
-    compile 'com.android.support:cardview-v7:25.3.1'
+
+    //dev deps
+    compile devLibraries.stetho
 }

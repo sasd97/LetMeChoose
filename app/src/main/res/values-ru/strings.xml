@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Позволь мне выбрать</string>
+    <string name="bottom_navigation_about">О приложении</string>
+    <string name="bottom_navigation_room">Студия</string>
+    <string name="bottom_navigation_settings">Настройки</string>
+    <string name="choose_fragment_add">Добавить</string>
+    <string name="choose_fragment_create_idea">Напиши идею тут</string>
+    <string name="choose_fragment_row_title">Идея #%1$d</string>
+    <string name="choose_fragment_select">Выбрать</string>
+</resources>

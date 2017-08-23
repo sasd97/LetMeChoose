@@ -1,7 +1,9 @@
 package sasd97.java_blog.xyz.letmechoose.presentation.choose;
 
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
@@ -15,13 +17,15 @@ import com.arellomobile.mvp.MvpAppCompatFragment;
 import com.arellomobile.mvp.presenter.InjectPresenter;
 import com.arellomobile.mvp.presenter.ProvidePresenter;
 
+import java.util.List;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import sasd97.java_blog.xyz.letmechoose.LetMeChooseApp;
 import sasd97.java_blog.xyz.letmechoose.R;
+import sasd97.java_blog.xyz.letmechoose.domain.models.IdeaModel;
 import sasd97.java_blog.xyz.letmechoose.presentation.IdeasRecyclerAdapter;
-import sasd97.java_blog.xyz.letmechoose.presentation.selectedDialog.SelectDialogFragment;
 import sasd97.java_blog.xyz.letmechoose.utils.SwipeToDismissListener;
 
 /**
@@ -44,8 +48,10 @@ public class ChooseFragment extends MvpAppCompatFragment
 
     @InjectPresenter ChoosePresenter presenter;
 
-    @BindView(R.id.choose_fragment_idea_message) EditText ideaDescription;
     @BindView(R.id.fragment_choose_recycler) RecyclerView ideasRecycler;
+    @BindView(R.id.choose_fragment_idea_message) EditText ideaDescription;
+    @BindView(R.id.choose_fragment_clear_ideas) FloatingActionButton clearIdeasButton;
+    @BindView(R.id.choose_fragment_select_idea) FloatingActionButton selectIdeaButton;
 
     @ProvidePresenter
     public ChoosePresenter providePresenter() {
@@ -80,8 +86,18 @@ public class ChooseFragment extends MvpAppCompatFragment
     }
 
     @Override
-    public void updateList(String idea) {
+    public void updateList(IdeaModel idea) {
         adapter.add(idea);
+    }
+
+    @Override
+    public void updateList(List<IdeaModel> ideas) {
+        adapter.addAll(ideas);
+    }
+
+    @Override
+    public void clearList() {
+        adapter.clear();
     }
 
     @Override
@@ -90,18 +106,44 @@ public class ChooseFragment extends MvpAppCompatFragment
     }
 
     @Override
-    public void showDialog(String idea) {
-        SelectDialogFragment.getInstance(idea).show(getChildFragmentManager(), null);
+    public void highlightCard(int position) {
+        Log.d("POSITION", String.valueOf(position));
+        adapter.highlightCard(position);
+        linearLayoutManager.scrollToPositionWithOffset(position, 20);
+    }
+
+    @Override
+    public void removeHighlight() {
+        adapter.removeHighlight();
+    }
+
+    @Override
+    public void showFab() {
+        clearIdeasButton.show();
+        selectIdeaButton.show();
+    }
+
+    @Override
+    public void hideFab() {
+        clearIdeasButton.hide();
+        selectIdeaButton.hide();
     }
 
     @OnClick(R.id.choose_fragment_add)
     public void onAddIdeaClick(View v) {
         String description = ideaDescription.getText().toString();
-        presenter.addIdea(description);
+        IdeaModel idea = new IdeaModel();
+        idea.setDescription(description);
+        presenter.addIdea(idea);
     }
 
     @OnClick(R.id.choose_fragment_select_idea)
     public void onSelectIdeaClick(View v) {
         presenter.selectIdea();
+    }
+
+    @OnClick(R.id.choose_fragment_clear_ideas)
+    public void onClearIdeas(View v) {
+        presenter.clearIdeas();
     }
 }

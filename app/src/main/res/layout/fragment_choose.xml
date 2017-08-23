@@ -18,7 +18,7 @@
             android:orientation="vertical"
             android:clickable="true"
             android:background="?attr/selectableItemBackground"
-            android:padding="16dp">
+            android:padding="8dp">
 
             <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
@@ -48,18 +48,40 @@
         <android.support.v7.widget.RecyclerView
             android:id="@+id/fragment_choose_recycler"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginTop="16dp" />
+            android:layout_height="match_parent" />
 
-        <android.support.design.widget.FloatingActionButton
-            android:id="@+id/choose_fragment_select_idea"
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:gravity="center"
             android:layout_alignParentBottom="true"
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true"
-            android:layout_margin="16dp"
-            app:fabSize="normal"
-            app:srcCompat="@drawable/ic_lightbulb_outline_white_24dp"/>
+            android:orientation="vertical">
+
+            <android.support.design.widget.FloatingActionButton
+                android:id="@+id/choose_fragment_clear_ideas"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginTop="8dp"
+                android:visibility="invisible"
+                app:fabSize="mini"
+                app:srcCompat="@drawable/ic_clear_white_24dp"/>
+
+            <android.support.design.widget.FloatingActionButton
+                android:id="@+id/choose_fragment_select_idea"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginTop="8dp"
+                android:visibility="invisible"
+                app:fabSize="normal"
+                app:srcCompat="@drawable/ic_lightbulb_outline_white_24dp"/>
+        </LinearLayout>
     </RelativeLayout>
 </LinearLayout>

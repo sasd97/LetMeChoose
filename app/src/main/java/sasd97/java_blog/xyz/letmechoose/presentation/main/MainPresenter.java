@@ -38,19 +38,16 @@ public class MainPresenter extends MvpPresenter<MainView> {
 
     public void navigateToChoose() {
         FragmentCommandDecorator command = new Replace(ChooseFragment.getInstance());
-        command.setNext(new AddToBackStack());
         router.pushForward(command);
     }
 
     public void navigateToSettings() {
         FragmentCommandDecorator command = new Replace(SettingsFragment.getInstance());
-        command.setNext(new AddToBackStack());
         router.pushForward(command);
     }
 
     public void navigateToAbout() {
         FragmentCommandDecorator command = new Replace(AboutFragment.getInstance());
-        command.setNext(new AddToBackStack());
         router.pushForward(command);
     }
 }
